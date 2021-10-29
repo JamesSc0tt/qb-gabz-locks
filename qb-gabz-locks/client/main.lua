@@ -66,7 +66,6 @@ Citizen.CreateThread(function()
 				else
 					doors = doorset.doors
 				end
-
 				for doorkey, door in pairs(doors) do
 					local door_entity = GetClosestObjectOfType(door.objCoords, 4.0, door.objHash, false, false, false)
 					if door_entity then
@@ -90,6 +89,13 @@ Citizen.CreateThread(function()
 				if dist < doorset.maxDistance then
 					if IsControlJustPressed(0, 38) then
 						TriggerServerEvent('qb-gabz-locks:toggle', key)
+					end
+					if Config.Prompt then
+						if doorset.locked then
+							DrawText3Ds(doorset.textCoords.x, doorset.textCoords.y, doorset.textCoords.z, '[E] Locked')	
+						else
+							DrawText3Ds(doorset.textCoords.x, doorset.textCoords.y, doorset.textCoords.z, '[E] Unlocked')
+						end
 					end
 				end
 			end
